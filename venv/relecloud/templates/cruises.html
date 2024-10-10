@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}
+ReleCloud - Cruises
+{% endblock title %}
+
+{% block content %}
+<h1>ReleCloud Cruises</h1>
+
+<ul class="list-group">
+    {% for cruise in cruises %}
+        <li class="list-group-item">
+            <h5>{{ cruise.name }}</h5> <!-- Nombre del crucero -->
+            <p><strong>Description:</strong> {{ cruise.description }}</p> <!-- Descripción del crucero -->
+            <p><strong>Destinations:</strong> 
+                {% for destination in cruise.destinations.all %}
+                    {{ destination.name }}{% if not forloop.last %}, {% endif %} <!-- Mostrar destinos -->
+                {% endfor %}
+            </p>
+            <a href="{% url 'cruise_detail' cruise.pk %}" class="btn btn-info">View Details</a> <!-- Enlace al detalle del crucero -->
+        </li>
+    {% endfor %}
+</ul>
+
+{% endblock content %}

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Galactic Company{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333333; /* Cambiado a un gris más claro */
+            background-color: #f4f4f4; /* Fondo más claro */
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.9); /* Fondo blanco con un poco de transparencia */
+            padding: 20px;
+            text-align: center;
+            position: sticky; /* Sticks to top */
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        nav {
+            margin: 10px 0;
+        }
+
+        nav a {
+            color: #007BFF; /* Color azul más claro */
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s, background 0.3s;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        nav a:hover {
+            color: #ffffff;
+            background-color: #007BFF; /* Efecto de hover azul */
+        }
+
+        /* Dropdown styles */
+        .dropdown {
+            display: inline-block;
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: #007BFF; /* Color de los enlaces del dropdown */
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #007BFF; /* Efecto hover en los enlaces del dropdown */
+            color: #ffffff;
+        }
+
+        /* Galactic Background */
+        .galactic-background {
+            background-image: url('https://images.unsplash.com/photo-1512161741214-56a0a93d91ab');
+            background-size: cover;
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        main {
+            background: rgba(255, 255, 255, 0.9); /* Fondo blanco con transparencia para el main */
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            max-width: 900px;
+            margin: auto;
+            text-align: center;
+            color: #333333; /* Color del texto más oscuro */
+        }
+
+        /* Blinking title */
+        .blink {
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(255, 255, 255, 0.9); /* Fondo blanco con transparencia */
+            padding: 15px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            color: #333333;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Responsiveness */
+        @media (max-width: 768px) {
+            nav a {
+                font-size: 16px;
+                margin: 5px;
+            }
+
+            main {
+                padding: 20px;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        {% load crispy_forms_tags %}
+        <h1 class="blink">Welcome to the Galactic Company</h1>
+        <nav>
+            <a class="nav-link" href="{% url 'index' %}">Home</a>
+            <a class="nav-link" href="{% url 'about' %}">About Us</a>
+            <a class="nav-link" href="{% url 'info_request' %}">Request Info</a> <!-- Info Request Form -->
+            
+            <!-- Dropdown for Destinations CRUD -->
+            <div class="dropdown">
+                <a class="nav-link" href="#">Manage Destinations</a>
+                <div class="dropdown-content">
+                    <a class="nav-link" href="{% url 'destination_create' %}">Create Destination</a>
+                    <a class="nav-link" href="{% url 'destinations' %}">View All Destinations</a>
+                </div>
+            </div>
+
+            <!-- Dropdown for Cruises CRUD -->
+            <div class="dropdown">
+                <a class="nav-link" href="#">Manage Cruises</a>
+                <div class="dropdown-content">
+                    <a class="nav-link" href="{% url 'cruise_create' %}">Create Cruise</a>
+                    <a class="nav-link" href="{% url 'cruises' %}">View All Cruises</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Background -->
+    <div class="galactic-background">
+        <main>
+            {% block content %}
+            {% endblock %}
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Galactic Company. All rights reserved.</p>
+    </footer>
+</body>
+</html>

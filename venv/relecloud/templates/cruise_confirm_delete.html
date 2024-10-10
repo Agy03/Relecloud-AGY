@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Delete Cruise{% endblock %}
+
+{% block content %}
+<h2>Delete Cruise</h2>
+<p>Are you sure you want to delete "{{ cruise.name }}"?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Confirm Delete</button>
+</form>
+<a href="{% url 'index' %}">Cancel</a>
+{% endblock %}
